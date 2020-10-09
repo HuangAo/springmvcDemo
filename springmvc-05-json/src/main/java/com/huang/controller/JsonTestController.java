@@ -1,5 +1,6 @@
 package com.huang.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.huang.pojo.User;
@@ -19,6 +20,7 @@ import java.util.List;
 @RestController
 public class JsonTestController {
 
+    //测试jackson的使用
     //@ResponseBody //使用@RestController后不需要@ResponseBody了
     @GetMapping("/jsontest")
     public String jsonTest() throws JsonProcessingException {
@@ -30,6 +32,7 @@ public class JsonTestController {
         return jsonstr;
     }
 
+    //测试JsonUtils类
     @GetMapping("/jsontest2")
     public String jsonTest2(){
         List<User> userList = new ArrayList();
@@ -38,5 +41,13 @@ public class JsonTestController {
         userList.add(user1);
         userList.add(user2);
         return JsonUtils.getJson(userList);
+    }
+
+    //测试fastjson的使用
+    @GetMapping("/jsontest3")
+    public Object jsonTest3(){
+        User user1 = new User("huang",18,"男");
+        Object json = JSON.toJSON(user1);
+        return json;
     }
 }
